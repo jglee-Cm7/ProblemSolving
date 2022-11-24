@@ -16,15 +16,15 @@ int main() {
   int j = 0;
   for (int i = 0; i < n; i++) {
     while (j < n) {
-      if (arr[j] % 2 == 1 && dCnt == k) break;
-      if (arr[j] % 2 == 1) {
+      if (arr[j] % 2 && dCnt == k) break;
+      if (arr[j] % 2) {
         dCnt++;
       }
       j++;
     }
     len = j - i - dCnt;
     mx = max(mx, len);
-    if (arr[i] % 2 == 1 && dCnt > 0) dCnt--;
+    if (arr[i] % 2 && dCnt) dCnt--;
   }
 
   cout << mx;
