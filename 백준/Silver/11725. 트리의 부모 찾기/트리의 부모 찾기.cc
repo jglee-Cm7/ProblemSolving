@@ -1,15 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> adj(100005);
+vector<int> adj[100005];
 vector<int> parent(100005);
-vector<int> vis(100005);
-void dfs(int cur, int p) {
-  if (vis[cur]) return;
-  vis[cur] = 1;
-  parent[cur] = p;
-  for (auto v : adj[cur])
-    dfs(v, cur);
+void dfs(int cur) {
+  for (auto v : adj[cur]) {
+    if (parent[cur] == v) continue;
+    parent[v] = cur;
+    dfs(v);
+  }
 }
 
 int main() {
@@ -25,7 +24,19 @@ int main() {
     adj[b].push_back(a);
   }
 
-  dfs(1, 0);
+  // dfs(1);
+  deque<int> q;
+  q.push_back(1);
+
+  while (!q.empty()) {
+    int cur = q.front();
+    q.pop_front();
+    for (int v : adj[cur]) {
+      if (parent[cur] == v) continue;
+      parent[v] = cur;
+      q.push_back(v);
+    }
+  }
 
   for (int i = 2; i <= n; i++)
     cout << parent[i] << "\n";
