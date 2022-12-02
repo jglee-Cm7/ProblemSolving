@@ -29,8 +29,8 @@ int main() {
   q.push_back(1);
 
   while (!q.empty()) {
-    int cur = q.front();
-    q.pop_front();
+    int cur = q.back();
+    q.pop_back();
     for (int v : adj[cur]) {
       if (parent[cur] == v) continue;
       parent[v] = cur;
