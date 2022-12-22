@@ -34,13 +34,5 @@ int main() {
       }
     }
   }
-
-  // for (auto row : d) {
-  //   for (auto col : row) {
-  //     cout << col << " ";
-  //   }
-  //   cout << "\n";
-  // }
-
   cout << d[m - 1][n - 1];
 }
