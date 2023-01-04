@@ -14,9 +14,6 @@ int main() {
   }
 
   sort(std.begin(), std.end());
-  // for (int s : std)
-  //   cout << s << " ";
-  // cout << "\n";
 
   long long ans = 0;
   for (int i = 0; i < n; i++) {
@@ -27,10 +24,6 @@ int main() {
       long long count =
           upper_bound(std.begin() + j + 1, std.end(), -(s1 + s2)) -
           lower_bound(std.begin() + j + 1, std.end(), -(s1 + s2));
-
-      // if (count)
-      //   cout << s1 << " " << s2 << " " << -(s1 + s2) << " : " << count <<
-      //   "\n";
       ans += count;
     }
   }
