@@ -26,29 +26,20 @@ int main() {
     }
   }
 
-  // for (int i = 1; i <= n; i++) {
-  //   for (int j = 1; j <= n; j++)
-  //     cout << floyd[i][j] << " ";
-  //   cout << "\n";
-  // }
-  // cout << "\n";
-
   vector<pair<int, int>> rtp;
   for (int i = 1; i <= n; i++) {
     int mx = 0;
+    // 각 친구이 도시별(i)로 왕복시간을 체크
     for (int s : stp) {
       int rt = floyd[s][i] + floyd[i][s];
-      // cout << s << " -> " << i << ": " << rt << "\n";
+      // 가장 시간이 오래걸리는 친구의 왕복시간 저장.
       mx = max(mx, rt);
     }
+    // i 도시로 갈 때 가장 시간이 오래걸리는 친구의 왕복시간
     rtp.push_back({mx, i});
   }
-  // cout << "\n";
 
   sort(rtp.begin(), rtp.end());
-  // for (auto [rt, p] : rtp)
-  // cout << rt << " " << p << "\n";
-
   for (int i = 0; i < (int)rtp.size(); i++) {
     cout << rtp[i].second << " ";
     if (i + 1 < (int)rtp.size() && rtp[i].first != rtp[i + 1].first) break;
