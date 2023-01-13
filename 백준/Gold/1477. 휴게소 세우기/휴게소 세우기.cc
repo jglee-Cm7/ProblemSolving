@@ -27,15 +27,12 @@ int main() {
   rest.push_back(l);
   sort(rest.begin(), rest.end());
 
-  int s = 1;
-  int e = l;
-  while (s <= e) {
+  int s = 1, e = l;
+  while (s < e) {
     int mid = (s + e) / 2;
     int c = getRest(rest, l, mid);
-    if (c > m)
-      s = mid + 1;
-    else
-      e = mid - 1;
+    if (c > m) s = mid + 1;
+    else e = mid;
   }
-  cout << e + 1;
+  cout << e;
 }
