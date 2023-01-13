@@ -3,7 +3,6 @@ using namespace std;
 int getRest(vector<int> &rest, int l, int d) {
   int count = 0;
   for (int i = 1; i < (int)rest.size(); i++) {
-    if (rest[i] - rest[i - 1] <= d) continue;
     int r = rest[i - 1];
     while (rest[i] - r > d) {
       count++;
@@ -33,7 +32,6 @@ int main() {
   while (s <= e) {
     int mid = (s + e) / 2;
     int c = getRest(rest, l, mid);
-    // cout << s << " " << mid << " " << e << " : " << c << "\n";
     if (c > m)
       s = mid + 1;
     else
