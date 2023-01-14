@@ -11,18 +11,19 @@ int main() {
   while (e--) {
     int u, v, w;
     cin >> u >> v >> w;
-    adj[u].push_back({v, w});
+    adj[u].push_back({w, v}); // 거리, 정점번호
   }
   d[s] = 0;
+  // <거리, 정점번호>
   priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
   pq.push({0, s});
   while (!pq.empty()) {
     auto [w, cur] = pq.top();
     pq.pop();
     if (d[cur] != w) continue;
-    for (auto [nxt, nxtW] : adj[cur]) {
-      if (w + nxtW < d[nxt]) {
-        d[nxt] = w + nxtW;
+    for (auto [nw, nxt] : adj[cur]) {
+      if (w + nw < d[nxt]) {
+        d[nxt] = w + nw;
         pq.push({d[nxt], nxt});
       }
     }
