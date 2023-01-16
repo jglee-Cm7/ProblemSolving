@@ -1,21 +1,20 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
-const ll INF = 0x3f3f3f3f;
+const int INF = 0x3f3f3f3f;
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
 
-  ll n, e;
+  int n, e;
   cin >> n >> e;
-  vector<vector<ll>> d(n + 1, vector<ll>(n + 1, INF));
+  vector<vector<int>> d(n + 1, vector<int>(n + 1, INF));
   while (e--) {
-    ll a, b, c;
+    int a, b, c;
     cin >> a >> b >> c;
     d[a][b] = c;
     d[b][a] = c;
   }
-  ll u, v;
+  int u, v;
   cin >> u >> v;
   for (int i = 1; i <= n; i++)
     d[i][i] = 0;
@@ -28,7 +27,7 @@ int main() {
     }
   }
 
-  ll ans = INF;
+  int ans = INF;
   if (d[1][u] != INF && d[u][v] != INF && d[v][n] != INF)
     ans = min(ans, d[1][u] + d[u][v] + d[v][n]);
   if (d[1][v] != INF && d[v][u] != INF && d[u][n] != INF)
