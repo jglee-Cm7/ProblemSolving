@@ -1,40 +1,34 @@
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
-const int INF = 0x3f3f3f3f;
+const ll INF = 0x3f3f3f3f;
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
 
-  int n, e;
+  ll n, e;
   cin >> n >> e;
-  vector<vector<int>> d(n + 1, vector<int>(n + 1, INF));
-  vector<vector<pair<int, int>>> adj(n + 1);
+  vector<vector<ll>> d(n + 1, vector<ll>(n + 1, INF));
   while (e--) {
-    int a, b, c;
+    ll a, b, c;
     cin >> a >> b >> c;
-    adj[a].push_back({c, b});
-    adj[b].push_back({c, a});
+    d[a][b] = c;
+    d[b][a] = c;
   }
-  int u, v;
+  ll u, v;
   cin >> u >> v;
-
-  priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
-  for (int i = 1; i <= n; i++) {
+  for (int i = 1; i <= n; i++)
     d[i][i] = 0;
-    pq.push({0, i});
-    while (!pq.empty()) {
-      auto [w, cur] = pq.top();
-      pq.pop();
-      if (d[i][cur] != w) continue;
-      for (auto [nw, nxt] : adj[cur]) {
-        if (w + nw >= d[i][nxt]) continue;
-        d[i][nxt] = w + nw;
-        pq.push({d[i][nxt], nxt});
+
+  for (int k = 1; k <= n; k++) {
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= n; j++) {
+        if (d[i][k] + d[k][j] < d[i][j]) d[i][j] = d[i][k] + d[k][j];
       }
     }
   }
 
-  int ans = INF;
+  ll ans = INF;
   if (d[1][u] != INF && d[u][v] != INF && d[v][n] != INF)
     ans = min(ans, d[1][u] + d[u][v] + d[v][n]);
   if (d[1][v] != INF && d[v][u] != INF && d[u][n] != INF)
