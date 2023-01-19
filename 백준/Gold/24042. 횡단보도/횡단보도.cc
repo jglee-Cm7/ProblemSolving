@@ -25,8 +25,7 @@ int main() {
     pq.pop();
     if (d[cur] != w) continue;
     for (auto [nw, nxt] : adj[cur]) {
-      if (nw <= w) // 2 <= 11
-        nw += ((w - nw) / m) * m + m;
+      if (nw <= w) nw += ((w - nw) / m) * m + m;
       if (nw >= d[nxt]) continue;
       d[nxt] = nw;
       pq.push({d[nxt], nxt});
