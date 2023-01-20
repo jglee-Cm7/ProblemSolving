@@ -18,8 +18,10 @@ int main() {
   vector<vector<ll>> d(k + 1, vector<ll>(n + 1, INF));
   priority_queue<tuple<ll, ll, ll>, vector<tuple<ll, ll, ll>>, greater<>> pq;
 
-  d[0][1] = 0;
-  pq.push({0, 0, 1});
+  for (int i = 0; i <= k; i++) {
+    d[i][1] = 0;
+    pq.push({0, i, 1});
+  }
 
   while (!pq.empty()) {
     auto [w, ck, cur] = pq.top();
@@ -36,12 +38,6 @@ int main() {
       }
     }
   }
-
-  // for (int i = 0; i <= k; i++) {
-  //   for (int j = 1; j <= n; j++)
-  //     cout << d[i][j] << " ";
-  //   cout << "\n";
-  // }
 
   ll mn = INF;
   for (int i = 0; i <= k; i++) {
