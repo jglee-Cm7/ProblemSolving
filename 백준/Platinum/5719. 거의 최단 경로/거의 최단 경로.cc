@@ -2,16 +2,12 @@
 using namespace std;
 const int INF = INT_MAX;
 
-vector<vector<pair<int, int>>> adj;
-vector<vector<int>> pre;
-bool ban[501][501];
-
-void banPath(int cur) {
+void banPath(vector<vector<bool>> &ban, vector<vector<int>> &pre, int cur) {
   for (auto x : pre[cur]) {
     if (x != -1) {
       if (ban[x][cur]) continue;
       ban[x][cur] = 1;
-      banPath(x);
+      banPath(ban, pre, x);
     }
   }
 }
@@ -23,8 +19,7 @@ int main() {
   while (1) {
     int n, m, s, e;
     cin >> n >> m;
-    adj.clear();
-    adj = vector<vector<pair<int, int>>>(n);
+    vector<vector<pair<int, int>>> adj(n);
     if (n == 0 && m == 0) break;
     cin >> s >> e;
     while (m--) {
@@ -33,11 +28,10 @@ int main() {
       adj[u].push_back({p, v});
     }
 
-    memset(ban, 0, sizeof ban);
+    vector<vector<bool>> ban(n, vector<bool>(n, 0));
     int mn = INF;
     while (1) {
-      pre.clear();
-      pre = vector<vector<int>>(n, vector<int>(1, -1));
+      vector<vector<int>> pre(n, vector<int>(1, -1));
       vector<int> d(n, INF);
       priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
       d[s] = 0;
@@ -66,7 +60,7 @@ int main() {
         break;
       }
 
-      banPath(e);
+      banPath(ban, pre, e);
 
       if (mn == INF || mn == d[e]) {
         mn = d[e];
