@@ -9,16 +9,9 @@ bool ban[501][501];
 void banPath(int cur) {
   for (auto x : pre[cur]) {
     if (x != -1) {
-      for (int i = 0; i < (int)adj[x].size(); i++) {
-        if (adj[x][i].second == cur && !ban[x][cur]) {
-          ban[x][cur] = true;
-          banPath(x);
-          break;
-        }
-      }
-      // if (ban[x][cur]) continue;
-      // ban[x][cur] = 1;
-      // banPath(x);
+      if (ban[x][cur]) continue;
+      ban[x][cur] = 1;
+      banPath(x);
     }
   }
 }
