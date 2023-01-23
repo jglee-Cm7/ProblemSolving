@@ -32,8 +32,7 @@ void func(int k) {
     egg[i].first += egg[k].second;
   }
 
-  int c = count(isBroken.begin(), isBroken.end(), 1);
-  mx = max(c, mx);
+  if (k == n - 1) func(k + 1);
 }
 
 int main() {
