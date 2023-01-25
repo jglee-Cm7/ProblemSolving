@@ -6,7 +6,7 @@ int main() {
 
   int n, m;
   cin >> n >> m;
-  set<string> note;
+  unordered_set<string> note;
   while (n--) {
     string s;
     cin >> s;
