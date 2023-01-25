@@ -14,11 +14,11 @@ void func(int i, int j, int k) {
     int x = i + dx[dir];
     int y = j + dy[dir];
     if (x < 0 || x >= r || y < 0 || y >= c) continue;
-    int c = board[x][y];
-    if (isUsed[c] == 1) continue;
-    isUsed[c] = 1;
+    int v = board[x][y];
+    if (isUsed[v] == 1) continue;
+    isUsed[v] = 1;
     func(x, y, k + 1);
-    isUsed[c] = 0;
+    isUsed[v] = 0;
   }
 }
 
@@ -29,14 +29,14 @@ int main() {
   cin >> r >> c;
   for (int i = 0; i < r; i++) {
     for (int j = 0; j < c; j++) {
-      char c;
-      cin >> c;
-      board[i][j] = c - 'A';
+      char s;
+      cin >> s;
+      board[i][j] = s - 'A';
     }
   }
 
-  int c = board[0][0];
-  isUsed[c] = 1;
+  int v = board[0][0];
+  isUsed[v] = 1;
   func(0, 0, 1);
 
   cout << ans;
