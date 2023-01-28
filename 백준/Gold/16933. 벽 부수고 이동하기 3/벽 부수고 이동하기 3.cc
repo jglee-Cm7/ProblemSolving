@@ -29,7 +29,6 @@ int main() {
       cout << vis[d][z][x][y];
       return 0;
     }
-    bool flag = false;
     int nd = (d + 1) % 2;
     for (int dir = 0; dir < 4; dir++) {
       int nx = x + dx[dir];
@@ -46,13 +45,11 @@ int main() {
           vis[nd][z + 1][nx][ny] = vis[d][z][x][y] + 1;
           q.push({nd, z + 1, nx, ny});
         } else {
-          flag = true;
+          if (vis[nd][z][x][y] > 0) continue;
+          vis[nd][z][x][y] = vis[d][z][x][y] + 1;
+          q.push({nd, z, x, y});
         }
       }
-    }
-    if (flag) {
-      vis[nd][z][x][y] = vis[d][z][x][y] + 1;
-      q.push({nd, z, x, y});
     }
   }
 
