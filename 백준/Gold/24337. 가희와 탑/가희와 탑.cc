@@ -15,11 +15,10 @@ int main() {
   if ((int)ans.size() > n) {
     cout << "-1";
     return 0;
-  } else {
-    cout << ans[0] << " ";
-    for (int i = 0; i < n - (int)ans.size(); i++)
-      cout << "1 ";
-    for (int i = 1; i < (int)ans.size(); i++)
-      cout << ans[i] << " ";
   }
+  cout << ans[0] << " ";
+  for (int i = 0; i < n - (int)ans.size(); i++)
+    cout << "1 ";
+  for (int i = 1; i < (int)ans.size(); i++)
+    cout << ans[i] << " ";
 }
