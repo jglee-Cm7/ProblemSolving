@@ -10,19 +10,26 @@ int main() {
   cin >> r >> c;
   int dx[4] = {0, 1, 0, -1};
   int dy[4] = {1, 0, -1, 0};
-  queue<pair<int, int>> q;
+  queue<pair<int, int>> qf;
+  queue<pair<int, int>> qj;
   for (int i = 0; i < r; i++) {
     for (int j = 0; j < c; j++) {
-      cin >> maze[i][j];
-      if (maze[i][j] == 'F') {
-        q.push({i, j});
+      char c;
+      cin >> c;
+      maze[i][j] = c;
+      if (c == 'F') {
+        qf.push({i, j});
         visF[i][j] = 1;
+      }
+      if (c == 'J') {
+        qj.push({i, j});
+        visJ[i][j] = 1;
       }
     }
   }
-  while (!q.empty()) {
-    auto [x, y] = q.front();
-    q.pop();
+  while (!qf.empty()) {
+    auto [x, y] = qf.front();
+    qf.pop();
     for (int dir = 0; dir < 4; dir++) {
       int nx = x + dx[dir];
       int ny = y + dy[dir];
@@ -30,21 +37,12 @@ int main() {
       if (visF[nx][ny]) continue;
       if (maze[nx][ny] != '.') continue;
       visF[nx][ny] = visF[x][y] + 1;
-      q.push({nx, ny});
+      qf.push({nx, ny});
     }
   }
-  for (int i = 0; i < r; i++) {
-    for (int j = 0; j < c; j++) {
-      if (maze[i][j] == 'J') {
-        q.push({i, j});
-        visJ[i][j] = 1;
-        break;
-      }
-    }
-  }
-  while (!q.empty()) {
-    auto [x, y] = q.front();
-    q.pop();
+  while (!qj.empty()) {
+    auto [x, y] = qj.front();
+    qj.pop();
     for (int dir = 0; dir < 4; dir++) {
       int nx = x + dx[dir];
       int ny = y + dy[dir];
@@ -57,7 +55,7 @@ int main() {
       if (maze[nx][ny] != '.') continue;
       if (visF[nx][ny] != 0 && visF[nx][ny] <= nt) continue;
       visJ[nx][ny] = nt;
-      q.push({nx, ny});
+      qj.push({nx, ny});
     }
   }
   cout << "IMPOSSIBLE";
