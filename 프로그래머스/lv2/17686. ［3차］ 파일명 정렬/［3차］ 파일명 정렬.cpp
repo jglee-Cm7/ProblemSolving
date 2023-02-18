@@ -9,7 +9,7 @@ vector<string> solution(vector<string> files) {
   for (int i = 0; i < files.size(); i++) {
     string file = files[i];
     string head;
-    string num;
+    int num;
     int p = 0;
     for (int j = 0; j < file.length(); j++) {
       if (isdigit(file[j])) {
@@ -18,13 +18,10 @@ vector<string> solution(vector<string> files) {
       }
     }
     head = file.substr(0, p);
+    num = stoi(file.substr(p));
     for (char &c : head)
       c = tolower(c);
-    for (int j = p; j < p + 5 && j < file.size(); j++) {
-      if (!isdigit(file[j])) break;
-      num.push_back(file[j]);
-    }
-    arr.push_back({file, head, stoi(num), i});
+    arr.push_back({file, head, num, i});
   }
 
   sort(arr.begin(), arr.end(), [](const auto &A, const auto &B) -> bool {
