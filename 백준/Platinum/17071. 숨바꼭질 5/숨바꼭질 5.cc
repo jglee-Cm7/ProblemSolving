@@ -7,15 +7,12 @@ int main() {
   cin.tie(0);
   int n, k;
   cin >> n >> k;
-  if (n == k) {
-    cout << "0";
-    return 0;
-  }
   for (int i = 0; i < 2; i++)
     fill(vis[i], vis[i] + N, -1);
 
   queue<pair<int, int>> q;
   q.push({n, 0});
+  vis[n][0] = 0;
   while (!q.empty()) {
     auto [cur, t] = q.front();
     q.pop();
@@ -28,7 +25,8 @@ int main() {
       q.push({nxt, t + 1});
     }
   }
-  int t = 1;
+
+  int t = 0;
   k += t;
   while (k <= 500000) {
     if (vis[k][t % 2] <= t) {
