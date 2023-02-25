@@ -29,17 +29,12 @@ int main() {
     int kc = key.length();
     int ans = 0;
     queue<pair<int, int>> q;
-
-
+    
     while (1) {
       vector<vector<int>> vis(h, vector<int>(w, 0));
       for (auto [x, y] : ent) {
-        if (bd[x][y] >= 'A' && bd[x][y] <= 'Z' &&
-            ks.find(bd[x][y] + 32) == ks.end())
-          continue;
-        if (bd[x][y] >= 'a' && bd[x][y] <= 'z') {
-          ks.insert(bd[x][y]);
-        }
+        if (bd[x][y] >= 'A' && bd[x][y] <= 'Z' && ks.find(bd[x][y] + 32) == ks.end()) continue;
+        if (bd[x][y] >= 'a' && bd[x][y] <= 'z') ks.insert(bd[x][y]);
         q.push({x, y});
         vis[x][y] = 1;
       }
@@ -54,12 +49,8 @@ int main() {
           if (nx < 0 || nx >= h || ny < 0 || ny >= w) continue;
           if (vis[nx][ny]) continue;
           if (bd[nx][ny] == '*') continue;
-          if (bd[nx][ny] >= 'A' && bd[nx][ny] <= 'Z' &&
-              ks.find(bd[nx][ny] + 32) == ks.end())
-            continue;
-          if (bd[nx][ny] >= 'a' && bd[nx][ny] <= 'z') {
-            ks.insert(bd[nx][ny]);
-          }
+          if (bd[nx][ny] >= 'A' && bd[nx][ny] <= 'Z' && ks.find(bd[nx][ny] + 32) == ks.end()) continue;
+          if (bd[nx][ny] >= 'a' && bd[nx][ny] <= 'z') ks.insert(bd[nx][ny]);
           vis[nx][ny] = vis[x][y] + 1;
           q.push({nx, ny});
         }
@@ -68,7 +59,6 @@ int main() {
       if (kc == (int)ks.size()) break;
       kc = ks.size();
     }
-
     cout << ans << "\n";
   }
 }
