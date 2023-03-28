@@ -35,13 +35,11 @@ int main() {
   cin >> x >> y;
 
   int s = 1;
-  int e = 1'000'000'001;
-  while (s < e) {
+  int e = 1'000'000'000;
+  while (s <= e) {
     int mid = (s + e) / 2;
-    if (isPossible(mid))
-      s = mid + 1;
-    else
-      e = mid;
+    if (isPossible(mid)) s = mid + 1;
+    else e = mid - 1;
   }
-  cout << e - 1;
+  cout << e;
 }
