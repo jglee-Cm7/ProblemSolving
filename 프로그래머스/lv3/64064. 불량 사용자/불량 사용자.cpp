@@ -1,10 +1,7 @@
+
 #include <bits/stdc++.h>
 
 using namespace std;
-
-bool used[10];
-set<string> cs;
-set<string> ans;
 
 bool match(string a, string x) {
     bool result = true;
@@ -16,31 +13,32 @@ bool match(string a, string x) {
     return true;
 }
 
-void func(int k, vector<string> user_id, vector<string> banned_id) {
-    if(k == banned_id.size()) {
-        string s = "";
-        for(string c : cs) s += c + " ";
-        ans.insert(s);
-        return;
-    }
-    
-    for(int i=0; i<user_id.size(); i++) {
-        if(used[i]) continue;
-        if(match(user_id[i], banned_id[k])) {
-            used[i] = 1;
-            cs.insert(user_id[i]);
-            func(k+1, user_id, banned_id);
-            cs.erase(user_id[i]);
-            used[i] = 0;
-        }
-    }
-}
-
 int solution(vector<string> user_id, vector<string> banned_id) {
+    vector<int> comb(user_id.size() - banned_id.size(), 0);
+    for(int i=0; i<banned_id.size(); i++) comb.push_back(1);
     int answer = 0;
-    
-    func(0, user_id, banned_id);
-    answer = ans.size();
+    vector<vector<string>> picked;
+    do {
+        vector<string> candi;
+        for(int i=0; i<comb.size(); i++)
+            if(comb[i]) candi.push_back(user_id[i]);
+        
+        
+        sort(candi.begin(), candi.end());
+        do {
+            bool success = true;
+            for(int i=0; i<candi.size(); i++) {
+                if(match(candi[i], banned_id[i])) continue;
+                success = false;
+                break;
+            }
+            if(success) {
+                answer++;
+                break;
+            }
+        } while(next_permutation(candi.begin(), candi.end()));
+        
+    } while(next_permutation(comb.begin(), comb.end()));
     
     return answer;
 }
