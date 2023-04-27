@@ -6,19 +6,14 @@ int n;
 map<string, vector<pair<string, bool>>> adj;
 
 void func(int k, string st, vector<string>& answer) {
-    if(k == n) {
-        for(string ans : answer)
-            cout << ans << " ";
-        cout << "\n";
-        return;
-    }
+    if(k == n) return;
     
     for(auto& [en, used] : adj[st]) {
         if(used) continue;
         answer.push_back(en);
         used = true;
         func(k+1, en, answer);
-        if(answer.size() == n+1) return;
+        if(answer.size() == n + 1) return;
         answer.pop_back();
         used = false;
     }
