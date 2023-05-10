@@ -6,14 +6,19 @@ int main() {
 
   int n;
   cin >> n;
-  vector<int> dp(n + 1, 0x3fffffff);
-  dp[3] = 1;
-  dp[5] = 1;
-  for (int i = 6; i <= n; i++)
-    dp[i] = min(dp[i - 3] + 1, dp[i - 5] + 1);
+  int answer = 0;
+  while (n > 0) {
+    if (n % 5 == 0) {
+      answer += n / 5;
+      n = 0;
+      break;
+    }
+    n -= 3;
+    answer++;
+  }
 
-  if (dp[n] >= 0x3fffffff)
-    cout << -1;
+  if (n == 0)
+    cout << answer;
   else
-    cout << dp[n];
+    cout << -1;
 }
