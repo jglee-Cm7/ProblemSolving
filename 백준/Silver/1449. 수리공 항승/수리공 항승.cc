@@ -14,14 +14,12 @@ int main() {
   }
   sort(rep.begin(), rep.end());
 
-  int ans = 1;
-  int p = rep[0] - 5 + l;
+  int p = 0;
+  int ans = 0;
   for (int r : rep) {
     if (r + 5 <= p) continue;
-    if (r + 5 > p) {
-      p = r - 5 + l;
-      ans++;
-    }
+    p = r - 5 + l;
+    ans++;
   }
   cout << ans;
 }
