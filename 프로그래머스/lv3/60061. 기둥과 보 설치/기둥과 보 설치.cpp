@@ -48,12 +48,10 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
             // 기둥
             bool possible = true;
             if(sType == 0) {
-                // 왼쪽 위 보, 바로 위 보, 바로 위 기둥 체크
                 board[y][x].first = 0;
                 
                 for(int i=n; i>=0; i--) {
                     for(int j=0; j<=n; j++) {
-                        
                         if(possible && checkPillar(i, j) == false) possible = false;
                         if(possible && checkPaper(i, j) == false) possible = false;
                         
@@ -65,7 +63,6 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
                 if(!possible) board[y][x].first = 1;
             } else {
                 // 보
-                // 바로 위 기둥, 오른쪽 기둥, 왼쪽 보, 오른쪽 보 체크
                 board[y][x].second = 0;
                 for(int i=n; i>=0; i--) {
                     for(int j=0; j<=n; j++) {
@@ -81,8 +78,6 @@ vector<vector<int>> solution(int n, vector<vector<int>> build_frame) {
             }
         }
     }
-    
-    
     
     for(int j=0; j<=n; j++) {
         for(int i=0; i<=n; i++) {
