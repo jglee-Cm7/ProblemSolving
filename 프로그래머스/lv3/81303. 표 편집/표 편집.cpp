@@ -5,7 +5,7 @@ struct Node {
     int v;
     Node* prev;
     Node* next;
-    Node(int v, Node* prev, Node* next) : v(v), prev(prev), next(next) {}
+    Node(int v, Node *prev, Node *next) : v(v), prev(prev), next(next) {}
 };
 
 string solution(int n, int k, vector<string> cmd) {
