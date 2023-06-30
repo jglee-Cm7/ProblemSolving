@@ -2,15 +2,8 @@ const [...input] = require("fs").readFileSync("/dev/stdin").toString().trim().sp
 
 const n = input.shift().trim();
 const arr = input.map((v) => Number(v.trim()));
+const dp = Array.from({ length: n }).fill(0);
+dp[0] = arr[0];
+for (let i = 1; i < n; i++) dp[i] = Math.max(dp[i - 1] * arr[i], arr[i]);
 
-let answer = 0;
-for (let i = 0; i < n; i++) {
-  let mx = arr[i];
-  answer = Math.max(answer, mx);
-  for (let j = i + 1; j < n; j++) {
-    mx = mx * arr[j];
-    answer = Math.max(answer, mx);
-  }
-}
-
-console.log(answer.toFixed(3));
+console.log(Math.max(...dp).toFixed(3));
