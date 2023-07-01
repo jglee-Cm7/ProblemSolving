@@ -10,12 +10,13 @@ for (let i = 0; i < n; i++) {
     sum[j] += stat[i][j];
   }
 }
-
-let cs = [];
+let answer = Infinity;
 let isUsed = Array.from({ length: n }).fill(0);
 const backtraking = (k, j, m) => {
   if (k === m) {
-    cs.push([...isUsed]);
+    let m = 0;
+    for (let i = 0; i < n; i++) if (isUsed[i]) m += sum[i];
+    answer = Math.min(answer, Math.abs(tot - m));
     return;
   }
 
@@ -26,12 +27,5 @@ const backtraking = (k, j, m) => {
     isUsed[i] = 0;
   }
 };
-for (let i = 1; i < n; i++) backtraking(0, 0, i);
-
-let answer = Infinity;
-cs.forEach((arr) => {
-  let m = 0;
-  for (let i = 0; i < n; i++) if (arr[i]) m += sum[i];
-  answer = Math.min(answer, Math.abs(tot - m));
-});
+for (let i = 1; i < n / 2 + 1; i++) backtraking(0, 0, i);
 console.log(answer);
